@@ -1,0 +1,113 @@
+<% content_for :top_content do %>
+  <div class="jumbotron">
+    <div class="container">
+              <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<div class="container">
+    <div class="row">
+      <div class="row">
+          <div class="col-lg-6">
+              <div class="btn-panel btn-panel-conversation">
+                  <button data-toggle="modal" data-target="#myModal" class="btn  col-lg-6 send-message-btn">
+                    <i class="fa fa-plus"></i> New Message
+                  </button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+
+        <div class="conversation-wrap col-lg-3">
+
+          <% User.all.each do |u|%>
+            <a href="<%= chat_path(u.id)%>" class="<%= 'selected' if u.id==params[:id].to_i%>">
+              <div class="media conversation">
+                  
+                  <div class="media-body">
+                      <h5 class="media-heading"><%=u.name%></h5>
+                      <% if u.user_type? %>  
+                        <small><%=u.user_type%> <%='(You)' if current_user.id==u.id%></small>
+                      <% else %>
+                        <small>None<%='(You)' if current_user.id==u.id%></small>
+                      <% end %>
+                  </div>
+              </div>
+            </a>
+          <% end %>
+            
+            
+        </div>
+
+
+
+        <div class="message-wrap col-lg-8">
+            <div class="msg-wrap">
+            <% if Message.between(params[:id].to_i, current_user.id).present?%>
+              <% Message.between(params[:id].to_i, current_user.id).all.each do |m|%>
+                  <div class="media msg">
+                      
+                    <div class="media-body">
+                        <small class="pull-right time"><i class="fa fa-clock-o"></i> <%= m.created_at.strftime("%d %b %H:%M")%></small>
+                        <h5 class="media-heading"><%= m.sender.name%></h5>
+
+                        <small class="col-lg-10"><%= m.message%></small>
+                    </div>
+                  </div>
+              <% end %>
+            <% else %>
+                <div class="media msg">
+                      
+                    <div class="media-body">
+                      <small class="col-lg-10">No Messages</small>
+                    </div>
+                  </div>
+            <% end %>
+            </div>
+
+            
+           
+        </div>
+    </div>
+</div>
+      
+    </div>
+  </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Message</h4>
+      </div>
+      <div class="modal-body">
+
+        <%= form_for(Message.new, url: chats_path) do |f| %>
+          <div class="form-group">
+            <%= f.label :receiver_id %>
+            <%= f.select :receiver_id, User.all.collect {|u| [ "#{u.name} (#{u.user_type})", u.id ] }, { :include_blank => "Please select" } %>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.label :Message %>
+            <%= f.text_field :message, class: 'form-control' %>
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.submit "Send Message", class: 'btn btn-primary pull-right' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% end %>
