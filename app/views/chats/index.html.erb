@@ -17,26 +17,7 @@
     </div>
     <div class="row">
 
-        <div class="conversation-wrap col-lg-3">
-
-          <% User.all.each do |u|%>
-            <a href="<%= chat_path(u.id)%>" class="<%= 'selected' if u.id==params[:id].to_i%>">
-              <div class="media conversation">
-                  
-                  <div class="media-body">
-                      <h5 class="media-heading"><%=u.name%></h5>
-                      <% if u.user_type? %>  
-                        <small><%=u.user_type%> <%='(You)' if current_user.id==u.id%></small>
-                      <% else %>
-                        <small>None<%='(You)' if current_user.id==u.id%></small>
-                      <% end %>
-                  </div>
-              </div>
-            </a>
-          <% end %>
-            
-            
-        </div>
+        
 
 
         <div class="message-wrap col-lg-8">
@@ -108,7 +89,7 @@
         <%= form_for(Message.new, url: chats_path) do |f| %>
           <div class="form-group">
             <%= f.label :receiver_id %>
-            <%= f.select :receiver_id, User.all.collect {|u| [ "#{u.name} (#{u.user_type})", u.id ] }, { :include_blank => "Please select" } %>
+            <%= f.select :receiver_id, User.all.collect {|u| [ "#{u.name} (#{u.name})", u.id ] }, { :include_blank => "Please select" } %>
           </div>
 
 
@@ -120,7 +101,7 @@
           
           <div class="row">
             <div class="col-md-12">
-              <%= f.submit "Send Message", class: 'btn btn-primary pull-right' %>
+              <%= f.submit "Send Message", class: 'btn btn-success pull-right' %>
             </div>
           </div>
         <% end %>

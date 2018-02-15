@@ -16,11 +16,6 @@
       </div>
     </div>
     <div class="row">
-
-        
-
-
-
         <div class="message-wrap col-lg-8" id="divi">
             <div class="msg-wrap">
             <% if Message.between(params[:id].to_i, current_user.id).present?%>
@@ -45,8 +40,6 @@
             
             
         </div>
-
-
 
         <div class="message-wrap col-lg-8"  id="divi">
             <div class="msg-wrap">
@@ -75,6 +68,7 @@
             
            
         </div>
+
         <div class="conversation-wrap col-lg-3">
 
           <% User.all.each do |u|%>

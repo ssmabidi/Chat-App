@@ -21,6 +21,15 @@
         display:block;
     }
 
+    .conversation-wrap a:nth-child(even){
+        background:#eeeeee;
+    }
+
+    .conversation-wrap a.selected{
+        background: #337ab7;
+        color:white;
+        display:block;
+    }
     .conversation-wrap
     {
         box-shadow: -2px 0 3px #ddd;
