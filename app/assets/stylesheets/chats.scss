@@ -1,12 +1,25 @@
 // Place all the styles related to the Chats controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-    .conversation-wrap a.selected{
-    	background: #337ab7;
-    	color:white;
-    	display:block;
+    .jumbotron{
+        background:white;
+    }
+    
+
+    .conversation-wrap a{
+        text-decoration:none;
+        display:block;
     }
 
+    .conversation-wrap a:nth-child(even){
+        background:#eeeeee;
+    }
+
+    .conversation-wrap a.selected{
+        background: #337ab7;
+        color:white;
+        display:block;
+    }
     .conversation-wrap
     {
         box-shadow: -2px 0 3px #ddd;

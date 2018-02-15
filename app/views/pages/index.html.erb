@@ -4,12 +4,12 @@
       <h1>Welcome!</h1>
       <% if user_signed_in? %>
       	<p>
-          <%= link_to 'Messenger',  chats_path, class: 'btn btn-primary btn-lg' %>
+          <%= link_to 'Go to Messenger',  chats_path, class: 'btn btn-success btn-lg' %>
       	</p>
       <% else %>
 	      <p>Register to get started.</p>
 	      <p>
-	        <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+	        <%= link_to 'Register', new_user_registration_path, class: 'btn btn-success btn-lg' %>
 	      </p>
 	  <% end %>
     </div>

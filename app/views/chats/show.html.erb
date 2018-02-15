@@ -7,36 +7,15 @@
     <div class="row">
       <div class="row">
           <div class="col-lg-6">
-              <div class="btn-panel btn-panel-conversation">
-                  <button data-toggle="modal" data-target="#myModal" class="btn  col-lg-6 send-message-btn">
-                    <i class="fa fa-plus"></i> New Message
-                  </button>
-              </div>
+            <button data-toggle="modal" data-target="#myModal" class="btn btn-success col-lg-6 ">
+              <i class="fa fa-plus"></i> New Message
+            </button>
           </div>
       </div>
     </div>
     <div class="row">
 
-        <div class="conversation-wrap col-lg-3">
-
-          <% User.all.each do |u|%>
-            <a href="<%= chat_path(u.id)%>" class="<%= 'selected' if u.id==params[:id].to_i%>">
-              <div class="media conversation">
-                  
-                  <div class="media-body">
-                      <h5 class="media-heading"><%=u.name%></h5>
-                      <% if u.user_type? %>  
-                        <small><%=u.user_type%> <%='(You)' if current_user.id==u.id%></small>
-                      <% else %>
-                        <small>None<%='(You)' if current_user.id==u.id%></small>
-                      <% end %>
-                  </div>
-              </div>
-            </a>
-          <% end %>
-            
-            
-        </div>
+        
 
 
 
@@ -58,7 +37,7 @@
                 <div class="media msg">
                       
                     <div class="media-body">
-                      <small class="col-lg-10">No Messages</small>
+                      <small class="col-lg-10">No Contact Selected / No messages to show</small>
                     </div>
                   </div>
             <% end %>
@@ -66,6 +45,28 @@
 
             
            
+        </div>
+
+
+        <div class="conversation-wrap col-lg-3">
+
+          <% User.all.each do |u|%>
+            <a href="<%= chat_path(u.id)%>" class="<%= 'selected' if u.id==params[:id].to_i%>">
+              <div class="media conversation">
+                  
+                  <div class="media-body">
+                      <h4 class="media-heading"><%=u.name%></h4>
+                      <% if u.user_type? %>  
+                        <small><%=u.user_type%> <%='(You)' if current_user.id==u.id%></small>
+                      <% else %>
+                        <small>None<%='(You)' if current_user.id==u.id%></small>
+                      <% end %>
+                  </div>
+              </div>
+            </a>
+          <% end %>
+            
+            
         </div>
     </div>
 </div>
@@ -100,7 +101,7 @@
           
           <div class="row">
             <div class="col-md-12">
-              <%= f.submit "Send Message", class: 'btn btn-primary pull-right' %>
+              <%= f.submit "Send Message", class: 'btn btn-success pull-right' %>
             </div>
           </div>
         <% end %>
