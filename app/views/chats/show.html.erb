@@ -7,9 +7,11 @@
     <div class="row">
       <div class="row">
           <div class="col-lg-6">
-            <button data-toggle="modal" data-target="#myModal" class="btn btn-success col-lg-6 ">
-              <i class="fa fa-plus"></i> New Message
-            </button>
+            <div class="btn-panel btn-panel-conversation">
+                <button data-toggle="modal" data-target="#myModal" class="btn  col-lg-6 send-message-btn">
+                  <i class="fa fa-plus"></i> New Message
+                </button>
+            </div>
           </div>
       </div>
     </div>
@@ -23,6 +25,33 @@
             <div class="msg-wrap">
             <% if Message.between(params[:id].to_i, current_user.id).present?%>
               <% Message.between(params[:id].to_i, current_user.id).all.reverse.each do |m|%>
+        <div class="conversation-wrap col-lg-3">
+
+          <% User.all.each do |u|%>
+            <a href="<%= chat_path(u.id)%>" class="<%= 'selected' if u.id==params[:id].to_i%>">
+              <div class="media conversation">
+                  
+                  <div class="media-body">
+                      <h5 class="media-heading"><%=u.name%></h5>
+                      <% if u.user_type? %>  
+                        <small><%=u.user_type%> <%='(You)' if current_user.id==u.id%></small>
+                      <% else %>
+                        <small>None<%='(You)' if current_user.id==u.id%></small>
+                      <% end %>
+                  </div>
+              </div>
+            </a>
+          <% end %>
+            
+            
+        </div>
+
+
+
+        <div class="message-wrap col-lg-8">
+            <div class="msg-wrap">
+            <% if Message.between(params[:id].to_i, current_user.id).present?%>
+              <% Message.between(params[:id].to_i, current_user.id).all.each do |m|%>
                   <div class="media msg">
                       
                     <div class="media-body">
@@ -46,8 +75,6 @@
             
            
         </div>
-
-
         <div class="conversation-wrap col-lg-3">
 
           <% User.all.each do |u|%>
