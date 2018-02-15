@@ -48,10 +48,10 @@
 
 
 
-        <div class="message-wrap col-lg-8">
+        <div class="message-wrap col-lg-8"  id="divi">
             <div class="msg-wrap">
             <% if Message.between(params[:id].to_i, current_user.id).present?%>
-              <% Message.between(params[:id].to_i, current_user.id).all.each do |m|%>
+              <% Message.between(params[:id].to_i, current_user.id).all.reverse.each do |m|%>
                   <div class="media msg">
                       
                     <div class="media-body">

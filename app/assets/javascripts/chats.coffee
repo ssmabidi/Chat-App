@@ -12,9 +12,10 @@ get_chat = ->
     type: 'GET',
     dataType: 'text'
     error: (textStatus, jqXHR, error) ->
+      alert "error"
     success: (res, textStatus, jqXHR) ->
       $("#divi").html(res)
       $("#divi").animate({ scrollTop: $('#divi').prop("scrollHeight")}, 1000)
 
 
-setInterval(get_chat, 2000);
+setInterval(get_chat, 2000);  

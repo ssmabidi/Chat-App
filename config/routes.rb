@@ -7,5 +7,4 @@ Rails.application.routes.draw do
 
   resources :chats, :only => [:index, :create, :new, :show]
   get '/showchat/:user_id' => 'chats#showchat', action: :showchat
-
 end

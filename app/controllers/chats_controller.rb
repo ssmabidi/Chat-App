@@ -6,9 +6,9 @@ class ChatsController < ApplicationController
 	end
 
 	def showchat
- 		@receiver_id = params[:user_id]
- 		render :partial => 'showchat'
- 	end
+		@receiver_id = params[:user_id]
+		render :partial => 'showchat'
+	end
 
 	def create
 		@message = Message.new(user_params)
