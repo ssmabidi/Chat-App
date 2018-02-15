@@ -1,0 +1,23 @@
+
+<div class="msg-wrap">
+<% if Message.between(@receiver_id.to_i, current_user.id).present?%>
+  <% Message.between(@receiver_id.to_i, current_user.id).all.reverse.each do |m|%>
+      <div class="media msg">
+          
+        <div class="media-body">
+            <small class="pull-right time"><i class="fa fa-clock-o"></i> <%= m.created_at.strftime("%d %b %H:%M")%></small>
+            <h5 class="media-heading"><%= m.sender.name%></h5>
+
+            <small class="col-lg-10"><%= m.message%></small>
+        </div>
+      </div>
+  <% end %>
+<% else %>
+    <div class="media msg">
+          
+        <div class="media-body">
+          <small class="col-lg-10">No Messages</small>
+        </div>
+      </div>
+<% end %>
+</div>
